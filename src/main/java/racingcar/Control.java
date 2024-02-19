@@ -16,7 +16,7 @@ public class Control {
     }
 
     public void nameInspect(String temp) {
-        if(temp.length() > 6) {
+        if(temp.length() >= 6) {
             throw new IllegalArgumentException("[ERROR] 이름은 5자 이하여야 한다.");
         }
     }
@@ -32,6 +32,7 @@ public class Control {
                 carList.add(new Car(nameInput[i]));
             }
         } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] 이름은 5자 이하여야 한다.");
             carList.clear();
             nameInput = Console.readLine().split(",");
             for(int i = 0;i < nameInput.length;i++) {
