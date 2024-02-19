@@ -25,8 +25,13 @@ public class Control {
             carList.add(new Car(nameInput[i]));
         }
         System.out.println("시도할 횟수는 몇회인가요?");
-        int count = Integer.valueOf(Console.readLine());
-
+        int count = 0;
+        try {
+            count = Integer.valueOf(Console.readLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] 시도 횟수는 숫자여야 한다.");
+            count = Integer.valueOf(Console.readLine());
+        }
         this.player = carList;
         this.countGame = count;
         this.playerNum = nameInput.length;
