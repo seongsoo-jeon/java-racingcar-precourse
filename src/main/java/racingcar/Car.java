@@ -21,5 +21,13 @@ public class Car {
         }
         System.out.println();
     }
+
+    public int getPosition() {
+        return this.position;
+    }
+
+    public String getName() {
+        return this.name;
+    }
     // 추가 기능 구현
 }
