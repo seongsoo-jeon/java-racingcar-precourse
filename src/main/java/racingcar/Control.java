@@ -28,7 +28,7 @@ public class Control {
         System.out.println("시도할 횟수는 몇회인가요?");
         int count = Integer.valueOf(Console.readLine());
 
-        this.player = player;
+        this.player = carList;
         this.countGame = count;
         this.playerNum = nameInput.length;
 
@@ -48,17 +48,34 @@ public class Control {
         }
         System.out.println();
 
-        if(n == countGame) {
+        if(n == this.countGame) {
             printWinner();
         }
 
     }
 
-    public void printResult() {
-
-    }
-
     public void printWinner() {
+        List<String> win = new ArrayList<String>();
+        int max = 0;
+        for(int i = 0;i < this.playerNum;i++) {
+            Car temp = this.player.get(0);
+            if(max < temp.getPosition()) {
+                win.clear();
+                max = temp.getPosition();
+            }
+
+            if(max == temp.getPosition()) {
+                win.add(temp.getName());
+            }
+        }
+
+        System.out.print("최종 우승자 : ");
+        for(int i = 0;i < win.size();i++) {
+            System.out.print(win.get(i));
+            if(i != win.size()) {
+                System.out.print(", ");
+            }
+        }
 
     }
 
