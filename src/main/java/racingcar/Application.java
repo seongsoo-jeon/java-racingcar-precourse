@@ -20,6 +20,7 @@ public class Application {
         System.out.println("시도할 횟수는 몇회인가요?\n");
         int count = Integer.valueOf(Console.readLine());
 
+        Control controller = new Control(carList, count);
 
     }
 }
