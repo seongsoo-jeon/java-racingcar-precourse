@@ -24,7 +24,6 @@ public class Control {
         for(int i = 0;i < nameInput.length;i++) {
             carList.add(new Car(nameInput[i]));
         }
-
         System.out.println("시도할 횟수는 몇회인가요?");
         int count = Integer.valueOf(Console.readLine());
 
@@ -32,6 +31,7 @@ public class Control {
         this.countGame = count;
         this.playerNum = nameInput.length;
 
+        System.out.println("실행 결과");
         for(int i = 1;i <= this.countGame;i++) {
             gameStart(i);
         }
@@ -39,12 +39,12 @@ public class Control {
 
     }
     public void gameStart(int n) {
-        System.out.println("실행 결과");
+
         for(int i = 0;i < playerNum;i++) {
             if(Randoms.pickNumberInRange(0, 9) >= 4) {
-                this.player.get(0).move();
-                this.player.get(0).printPos();
+                this.player.get(i).move();
             }
+            this.player.get(i).printPos();
         }
         System.out.println();
 
@@ -57,22 +57,25 @@ public class Control {
     public void printWinner() {
         List<String> win = new ArrayList<String>();
         int max = 0;
-        for(int i = 0;i < this.playerNum;i++) {
-            Car temp = this.player.get(0);
-            if(max < temp.getPosition()) {
-                win.clear();
-                max = temp.getPosition();
-            }
+        int cnt = 0;
 
-            if(max == temp.getPosition()) {
-                win.add(temp.getName());
+        for(int i = 0;i < this.playerNum;i++) {
+            if(max < this.player.get(i).getPosition()) {
+                max = this.player.get(i).getPosition();
+            }
+        }
+
+        for(int i = 0;i < this.playerNum;i++) {
+            if(max == this.player.get(i).getPosition()) {
+                win.add(this.player.get(i).getName());
+                cnt++;
             }
         }
 
         System.out.print("최종 우승자 : ");
         for(int i = 0;i < win.size();i++) {
             System.out.print(win.get(i));
-            if(i != win.size()) {
+            if(i < cnt - 1) {
                 System.out.print(", ");
             }
         }
