@@ -15,14 +15,28 @@ public class Control {
         gameSet();
     }
 
+    public void nameInspect(String temp) {
+        if(temp.length() > 6) {
+            throw new IllegalArgumentException("[ERROR] 이름은 5자 이하여야 한다.");
+        }
+    }
 
     public void gameSet() {
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String[] nameInput = Console.readLine().split(",");
 
         List<Car> carList = new ArrayList<Car>();
-        for(int i = 0;i < nameInput.length;i++) {
-            carList.add(new Car(nameInput[i]));
+        try {
+            for (int i = 0; i < nameInput.length; i++) {
+                nameInspect(nameInput[i]);
+                carList.add(new Car(nameInput[i]));
+            }
+        } catch (IllegalArgumentException e) {
+            carList.clear();
+            nameInput = Console.readLine().split(",");
+            for(int i = 0;i < nameInput.length;i++) {
+                carList.add(new Car(nameInput[i]));
+            }
         }
         System.out.println("시도할 횟수는 몇회인가요?");
         int count = 0;
